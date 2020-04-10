@@ -1,0 +1,33 @@
+﻿@model Track
+@{
+    ViewData["Title"] = "Music Charts";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Name</h1>
+    <div style="display:flex; flex-wrap:wrap;
+                justify-content:space-around;flex-flow:column">
+        <p>
+            <br />
+            <span>Жанр - </span>
+            @foreach (var detail in Model.Genres.OrderBy(x => x.Name))
+            {
+                <a asp-controller="Genre" asp-action="Info"
+                   asp-route-id="@detail.Name" style="font-weight:700;">@detail.Name</a>
+            }
+            <br />
+            <span>Исполнтель - </span>
+            @foreach (var detail in Model.Singers.OrderBy(x => x.Name))
+            {
+                <a asp-controller="Singer" asp-action="Info"
+                   asp-route-id="@detail.Name" style="font-weight:700;">@detail.Name</a>
+            }
+            <br />
+            <span>Текст - @Model.Text</span>
+            <br />
+            <span>Продолжительнось - @Model.Time</span>
+            <br />
+            <span>Дата создания - @Model.DateCreate</span>
+        </p>
+        </div>
+</div>
