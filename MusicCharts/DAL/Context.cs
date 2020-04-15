@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MusicCharts.Models;
 using System;
 using System.Collections.Generic;
@@ -14,41 +15,69 @@ namespace MusicCharts.DAL
         public DbSet<Singer> Singer { get; set; }
         public DbSet<GenreTrack> GenreTrack { get; set; }
         public DbSet<SingerTrack> SingerTrack { get; set; }
+        public DbSet<ChartTrack> ChartTrack { get; set; }
+        public DbSet<AlboumTrack> AlboumTrack { get; set; }
 
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<GenreTrack>()
-            //    .HasKey(t => new { t.StudentId, t.CourseId });
-
-            modelBuilder.Entity<GenreTrack>()
-                .HasOne(sc => sc.Track)
-                .WithMany(s => s.GenreTrack)
-                .HasForeignKey(sc => sc.IDTrack);
-
-            modelBuilder.Entity<GenreTrack>()
-                .HasOne(sc => sc.Genre)
-                .WithMany(c => c.GenreTrack)
-                .HasForeignKey(sc => sc.IDGenre);
-
-            modelBuilder.Entity<SingerTrack>()
-                .HasOne(sc => sc.Track)
-                .WithMany(s => s.SingerTrack)
-                .HasForeignKey(sc => sc.IDTrack);
-
-            modelBuilder.Entity<SingerTrack>()
-                .HasOne(sc => sc.Singer)
-                .WithMany(s => s.SingerTrack)
-                .HasForeignKey(sc => sc.IDTrack);
-
-        }
-        public Context()
-        {
-
-        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-CDNKH0P\SQLEXPRESS;Database=mispisit5;Trusted_Connection=True;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<GenreTrack>()
+                .HasOne(x => x.Genre)
+                .WithMany(x => x.GenreTracks)
+                .HasForeignKey(x => x.IDGenre);
+
+            modelBuilder
+                .Entity<GenreTrack>()
+                .HasOne(x => x.Track)
+                .WithMany(x => x.GenreTracks)
+                .HasForeignKey(x => x.IDTrack);
+
+            modelBuilder
+                .Entity<SingerTrack>()
+                .HasOne(x => x.Singer)
+                .WithMany(x => x.SingerTracks)
+                .HasForeignKey(x => x.IDSinger);
+
+            modelBuilder
+                .Entity<SingerTrack>()
+                .HasOne(x => x.Track)
+                .WithMany(x => x.SingerTracks)
+                .HasForeignKey(x => x.IDTrack);
+
+            modelBuilder
+                .Entity<ChartTrack>()
+                .HasOne(x => x.Chart)
+                .WithMany(x => x.ChartTracks)
+                .HasForeignKey(x => x.IDChart);
+
+            modelBuilder
+                .Entity<ChartTrack>()
+                .HasOne(x => x.Track)
+                .WithMany(x => x.ChartTracks)
+                .HasForeignKey(x => x.IDTrack);
+
+            modelBuilder
+                .Entity<AlboumTrack>()
+                .HasOne(x => x.Alboum)
+                .WithMany(x => x.AlboumTracks)
+                .HasForeignKey(x => x.IDAlboum);
+
+            modelBuilder
+                .Entity<AlboumTrack>()
+                .HasOne(x => x.Track)
+                .WithMany(x => x.AlboumTracks)
+                .HasForeignKey(x => x.IDTrack);
+        }
     }
 }
+
+
+
+
+
+

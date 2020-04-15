@@ -6,6 +6,9 @@
 a {
   color: orange; }
 
+a:hover {
+  color: orange; }
+
 .btn-primary {
   color: #fff;
   background-color: blue;
@@ -95,3 +98,9 @@ audio {
   justify-content: space-between; }
   .track-group > div {
     width: 50%; }
+
+.music-info h3 span:last-child {
+  background-color: rgba(255, 106, 0, 0.3); }
+
+.music-text p {
+  background-color: rgba(255, 106, 0, 0.3); }

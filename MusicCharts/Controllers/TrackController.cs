@@ -25,9 +25,9 @@ namespace MusicCharts.Controllers
         {
             using (var db = new Context())
             {
-                var track = db.Track.Include(x => x.SingerTrack)
+                var track = db.Track.Include(x => x.SingerTracks)
                                     .ThenInclude(x => x.Singer)
-                                    .Include(x => x.GenreTrack)
+                                    .Include(x => x.GenreTracks)
                                     .ThenInclude(x => x.Genre)
                                     .FirstOrDefault(x => x.ID == Id);
 
@@ -45,14 +45,13 @@ namespace MusicCharts.Controllers
                 }
 
                 var buf = FileIO.ReadAllBytes(Path.Combine(musicDir, track.Path));
-                var webPath = Path.Combine("audio", $"{track.ID}{Path.GetExtension(track.Path)}");
-                var path = Path.Combine(_env.WebRootPath, webPath);
+                var webPath1 = Path.Combine("audio", $"{track.ID}{Path.GetExtension(track.Path)}");
+                var webPath2 = Path.Combine("..\\..\\..\\","audio", $"{track.ID}{Path.GetExtension(track.Path)}");
+                var path = Path.Combine(_env.WebRootPath, webPath1);
 
                 FileIO.WriteAllBytes(path, buf);
 
-                //special path for web
-                webPath = @"" + webPath.Replace("/", @"");
-                return Json(webPath);
+                return Json(webPath2);
             }
         }
     }

@@ -1,32 +1,27 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using MusicCharts.DAL;
 using Microsoft.EntityFrameworkCore;
+using MusicCharts.DAL;
 
 namespace MusicCharts.Controllers
 {
-    public class HomeController : Controller
+    public class AlboumsController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             using (var db = new Context())
             {
                 var model = db.Track
-                              .Include(x => x.GenreTracks)
-                              .ThenInclude(x => x.Genre)
+                              .Include(x => x.AlboumTracks)
+                              .ThenInclude(x => x.Alboum)
                               .Include(x => x.SingerTracks)
                               .ThenInclude(x => x.Singer)
                               .ToList()
-                              .SelectMany(x => x.GenreTracks)
-                              .Select(x => x.Genre)
+                              .SelectMany(x => x.AlboumTracks)
+                              .Select(x => x.Alboum)
                               .Distinct()
                               .ToList();
                 return View(model);

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -6,11 +7,11 @@ using MusicCharts.DAL;
 
 namespace MusicCharts.Controllers
 {
-    public class GenreController : Controller
+    public class ChartController : Controller
     {
-        private readonly ILogger<GenreController> _logger;
+        private readonly ILogger<ChartController> _logger;
 
-        public GenreController(ILogger<GenreController> logger)
+        public ChartController(ILogger<ChartController> logger)
         {
             _logger = logger;
         }
@@ -21,12 +22,12 @@ namespace MusicCharts.Controllers
             {
                 var model = db.Track.Include(x => x.SingerTracks)
                                     .ThenInclude(x => x.Singer)
-                                    .Include(x => x.GenreTracks)
-                                    .ThenInclude(x => x.Genre)
-                                    .Where(x => x.GenreTracks.Any(y => y.IDGenre == id))
+                                    .Include(x => x.ChartTracks)
+                                    .ThenInclude(x => x.Chart)
+                                    .Where(x => x.ChartTracks.Any(y => y.IDChart == id))
                                     .ToList()
-                                    .SelectMany(x => x.GenreTracks)
-                                    .Select(x => x.Genre)
+                                    .SelectMany(x => x.ChartTracks)
+                                    .Select(x => x.Chart)
                                     .FirstOrDefault();
                 return View(model);
             }

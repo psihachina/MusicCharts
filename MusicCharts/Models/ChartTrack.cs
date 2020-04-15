@@ -11,9 +11,9 @@ namespace MusicCharts.Models
         public int ID { get; set; }
         public int IDTrack { get; set; }
         public int IDChart { get; set; }
-        [ForeignKey("IDTrack")]
+        [ForeignKey(nameof(ChartTrack.IDTrack))]
         public virtual Track Track { get; set; }
-        [ForeignKey("IDChart")]
+        [ForeignKey(nameof(ChartTrack.IDTrack))]
         public virtual Chart Chart { get; set; }
     }
 }

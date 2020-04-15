@@ -13,7 +13,7 @@ namespace MusicCharts.Models
         public int IDGenre { get; set; }
         [ForeignKey(nameof(GenreTrack.IDTrack))]
         public Track Track { get; set; }
-        [ForeignKey(nameof(GenreTrack.IDTrack))]
+        [ForeignKey(nameof(GenreTrack.IDGenre))]
         public Genre Genre { get; set; }
     }
 }

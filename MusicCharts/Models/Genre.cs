@@ -10,8 +10,8 @@ namespace MusicCharts.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<GenreTrack> GenreTrack { get; set; } = new HashSet<GenreTrack>();
+        public virtual ICollection<GenreTrack> GenreTracks { get; set; } = new HashSet<GenreTrack>();
         [NotMapped]
-        public virtual IEnumerable<Track> Tracks { get { return GenreTrack.Select((x) => x.Track); } }
+        public virtual IEnumerable<Track> Tracks { get { return GenreTracks.Select((x) => x.Track); } }
     }
 }

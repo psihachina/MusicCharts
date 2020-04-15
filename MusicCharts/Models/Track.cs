@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace MusicCharts.Models
 {
@@ -10,38 +10,25 @@ namespace MusicCharts.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public DateTime DateCreate { get; set; }
-        public TimeSpan? Time { get; set; }
         public string Text { get; set; }
+        public DateTime DateCreated { get; set; }
+        public TimeSpan? Time { get; set; }
+        [MaxLength(200)]
         public string Path { get; set; }
-
-
-        public virtual ICollection<GenreTrack> GenreTrack { get; set; } = new HashSet<GenreTrack>();
+        public virtual ICollection<GenreTrack> GenreTracks { get; set; } = new HashSet<GenreTrack>();
         [NotMapped]
-        public IEnumerable<Genre> Genres => GenreTrack.Select(x => x.Genre);
+        public IEnumerable<Genre> Genres => GenreTracks.Select(x => x.Genre);
 
-
+        public virtual ICollection<SingerTrack> SingerTracks { get; set; } = new HashSet<SingerTrack>();
         [NotMapped]
-        public virtual ICollection<AlboumTrack> AlboumTrack { get; set; } = new List<AlboumTrack>();
+        public IEnumerable<Singer> Singers => SingerTracks.Select(x => x.Singer);
+
+        public virtual ICollection<ChartTrack> ChartTracks { get; set; } = new HashSet<ChartTrack>();
         [NotMapped]
-        public virtual IEnumerable<Alboum> Alboums { get { return AlboumTrack.Select((x) => x.Alboum); } }
+        public IEnumerable<Chart> Charts => ChartTracks.Select(x => x.Chart);
 
-
+        public virtual ICollection<AlboumTrack> AlboumTracks { get; set; } = new HashSet<AlboumTrack>();
         [NotMapped]
-        public virtual ICollection<ChartTrack> ChartTrack { get; set; } = new List<ChartTrack>();
-        [NotMapped]
-        public virtual IEnumerable<Chart> Charts { get { return ChartTrack.Select((x) => x.Chart); } }
-
-
-
-        public virtual ICollection<SingerTrack> SingerTrack { get; set; } = new HashSet<SingerTrack>();
-        [NotMapped]
-        public IEnumerable<Singer> Singers => SingerTrack.Select(x => x.Singer);
-
-
-        [NotMapped]
-        public virtual ICollection<CharacterTrack> CharacterTrack { get; set; } = new List<CharacterTrack>();
-        [NotMapped]
-        public virtual IEnumerable<Character> Characters { get { return CharacterTrack.Select((x) => x.Character); } }
+        public IEnumerable<Alboum> Alboums => AlboumTracks.Select(x => x.Alboum);
     }
 }

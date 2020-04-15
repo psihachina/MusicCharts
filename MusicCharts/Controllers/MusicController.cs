@@ -6,11 +6,11 @@ using MusicCharts.DAL;
 
 namespace MusicCharts.Controllers
 {
-    public class GenreController : Controller
+    public class MusicController : Controller
     {
-        private readonly ILogger<GenreController> _logger;
+        private readonly ILogger<MusicController> _logger;
 
-        public GenreController(ILogger<GenreController> logger)
+        public MusicController(ILogger<MusicController> logger)
         {
             _logger = logger;
         }
@@ -23,10 +23,8 @@ namespace MusicCharts.Controllers
                                     .ThenInclude(x => x.Singer)
                                     .Include(x => x.GenreTracks)
                                     .ThenInclude(x => x.Genre)
-                                    .Where(x => x.GenreTracks.Any(y => y.IDGenre == id))
+                                    .Where(x => x.SingerTracks.Any(y => y.IDTrack == id))
                                     .ToList()
-                                    .SelectMany(x => x.GenreTracks)
-                                    .Select(x => x.Genre)
                                     .FirstOrDefault();
                 return View(model);
             }
