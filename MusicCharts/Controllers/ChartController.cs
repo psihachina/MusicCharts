@@ -29,6 +29,15 @@ namespace MusicCharts.Controllers
                                     .SelectMany(x => x.ChartTracks)
                                     .Select(x => x.Chart)
                                     .FirstOrDefault();
+
+                //Чистка папки audio
+                DirectoryInfo dirInfo = new DirectoryInfo("D:\\Projects\\MusicCharts\\MusicCharts\\wwwroot\\audio");
+                foreach (FileInfo file in dirInfo.GetFiles())
+                {
+                    file.Delete();
+                }
+
+
                 return View(model);
             }
         }

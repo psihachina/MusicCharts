@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -28,6 +29,14 @@ namespace MusicCharts.Controllers
                                     .SelectMany(x => x.GenreTracks)
                                     .Select(x => x.Genre)
                                     .FirstOrDefault();
+
+                //Чистка папки audio
+                DirectoryInfo dirInfo = new DirectoryInfo("D:\\Projects\\MusicCharts\\MusicCharts\\wwwroot\\audio");
+                foreach (FileInfo file in dirInfo.GetFiles())
+                {
+                    file.Delete();
+                }
+
                 return View(model);
             }
         }

@@ -48,9 +48,9 @@ namespace MusicCharts.Controllers
                 var webPath1 = Path.Combine("audio", $"{track.ID}{Path.GetExtension(track.Path)}");
                 var webPath2 = Path.Combine("..\\..\\..\\","audio", $"{track.ID}{Path.GetExtension(track.Path)}");
                 var path = Path.Combine(_env.WebRootPath, webPath1);
-
+                var fl = FileIO.Exists(path);
+                if(!fl)
                 FileIO.WriteAllBytes(path, buf);
-
                 return Json(webPath2);
             }
         }
