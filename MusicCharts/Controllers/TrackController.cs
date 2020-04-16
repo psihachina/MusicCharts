@@ -43,15 +43,16 @@ namespace MusicCharts.Controllers
                     _logger.LogWarning(ex, "", null);
                     throw ex;
                 }
-
-                var buf = FileIO.ReadAllBytes(Path.Combine(musicDir, track.Path));
-                var webPath1 = Path.Combine("audio", $"{track.ID}{Path.GetExtension(track.Path)}");
-                var webPath2 = Path.Combine("..\\..\\..\\","audio", $"{track.ID}{Path.GetExtension(track.Path)}");
-                var path = Path.Combine(_env.WebRootPath, webPath1);
+                var webPath = Path.Combine("audio", $"{track.ID}{Path.GetExtension(track.Path)}");
+                var path = Path.Combine(_env.WebRootPath, webPath);
                 var fl = FileIO.Exists(path);
-                if(!fl)
-                FileIO.WriteAllBytes(path, buf);
-                return Json(webPath2);
+                if (!fl)
+                {
+                    var buf = FileIO.ReadAllBytes(Path.Combine(musicDir, track.Path));
+                    FileIO.WriteAllBytes(path, buf);
+                }
+                webPath = @"\" + webPath.Replace("/", @"\");
+                return Json(webPath);
             }
         }
     }

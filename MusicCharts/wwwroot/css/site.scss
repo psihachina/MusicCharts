@@ -5,7 +5,13 @@ $color4: yellow;
 $color5: #e5e5e5;
 $color6: rgba(0, 0, 0, .05);
 $color7: rgba(255, 106, 0, 0.30);
-
+$nord0: #2e3440;
+$nord4: #d8dee9;
+$nord6: #eceff4;
+$nord5: #e5e9f0;
+$nord8: #88c0d0;
+$nord15: #b48ead;
+$nord12: #d08770;
 @mixin border($side: 'all', $color: $color5, $width: 1px) {
     @if($side == 'all') {
         border: $width solid $color;
@@ -27,6 +33,23 @@ $color7: rgba(255, 106, 0, 0.30);
         border-right: $width solid $color;
     }
 }
+img{
+    border: none;
+}
+*{
+    color: $nord0;
+}
+body{
+    background-color: $nord6;
+}
+.main{
+    background-color: $nord5;
+    height:100%;
+}
+.navbar {
+    background-color: $nord4 !important;
+    box-shadow: rgba(216, 222, 233, 0.15) 0px 5px 10px 0px !important;
+}
 
 a.navbar-brand {
     white-space: normal;
@@ -36,10 +59,10 @@ a.navbar-brand {
 
 
 a {
-    color: $color2;
+    color: $nord8;
 }
 a:hover {
-    color: $color2;
+    color: $nord8;
 }
 
 .btn-primary {
@@ -98,6 +121,8 @@ body {
     width: 100%;
     white-space: nowrap;
     line-height: 60px;
+    background-color: $nord4;
+    box-shadow: rgba(216, 222, 233, 0.15) 0px 5px 10px 0px;
 }
 
 #audio {
@@ -115,19 +140,19 @@ audio {
 }
 
 .track-play {
-    background: url('../img/play.png');
+    background: url('../img/play.svg');
 }
 
 .track-pause {
-    background: url('../img/pause.png');
+    background: url('../img/stop.svg');
 }
 
 .track-play, .track-pause {
-    border-radius: 50%;
     width: 40px;
     height: 40px;
     cursor: pointer;
     background-size: contain;
+    border: none;
 }
 
 .track-block {
@@ -161,7 +186,7 @@ audio {
 .music-info {
     h3 {
         span:last-child {
-            background-color: $color7;
+            background-color: $nord12;
         }
     }
 }

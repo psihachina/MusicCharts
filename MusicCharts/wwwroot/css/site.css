@@ -1,13 +1,30 @@
-﻿a.navbar-brand {
+﻿img {
+  border: none; }
+
+* {
+  color: #2e3440; }
+
+body {
+  background-color: #eceff4; }
+
+.main {
+  background-color: #e5e9f0;
+  height: 100%; }
+
+.navbar {
+  background-color: #d8dee9 !important;
+  box-shadow: rgba(216, 222, 233, 0.15) 0px 5px 10px 0px !important; }
+
+a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all; }
 
 a {
-  color: orange; }
+  color: #88c0d0; }
 
 a:hover {
-  color: orange; }
+  color: #88c0d0; }
 
 .btn-primary {
   color: #fff;
@@ -52,7 +69,9 @@ body {
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; }
+  line-height: 60px;
+  background-color: #d8dee9;
+  box-shadow: rgba(216, 222, 233, 0.15) 0px 5px 10px 0px; }
 
 #audio {
   position: absolute;
@@ -67,17 +86,17 @@ audio {
   margin: 0 50px; }
 
 .track-play {
-  background: url("../img/play.png"); }
+  background: url("../img/play.svg"); }
 
 .track-pause {
-  background: url("../img/pause.png"); }
+  background: url("../img/stop.svg"); }
 
 .track-play, .track-pause {
-  border-radius: 50%;
   width: 40px;
   height: 40px;
   cursor: pointer;
-  background-size: contain; }
+  background-size: contain;
+  border: none; }
 
 .track-block {
   display: flex;
@@ -100,7 +119,7 @@ audio {
     width: 50%; }
 
 .music-info h3 span:last-child {
-  background-color: rgba(255, 106, 0, 0.3); }
+  background-color: #d08770; }
 
 .music-text p {
   background-color: rgba(255, 106, 0, 0.3); }
